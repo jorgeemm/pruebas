@@ -1,0 +1,203 @@
+---
+title: "Gráficos de líneas"
+page_id: g_lineas
+---
+
+## Evolución temporal
+
+### Evolución de votantes
+
+::: panel-tabset
+#### Gráfico
+
+![](01_img/lineas_valoracion.png){.zoomable fig-align="center" width="500"}
+
+#### Código
+
+``` r
+ggplot(cis_pop_recu, aes(x=mes, y=Feijoo, color=recuerdo, group=recuerdo)) +
+  geom_hline(yintercept = seq(1, 10, by = 1), color = "lightgrey", alpha = 0.5)+
+  geom_line(linewidth=0.9, linetype=1)+
+  geom_point()+
+  theme_classic()+
+  labs(x="Mes de la encuesta",
+       y="Valoración media (1 al 10)",
+       caption = "Evolución de la valoración de Alberto Nuñez Feijoo según el recuerdo de voto\nFuente: elaboración propia a partir de los datos del CIS")+
+  theme(
+        legend.position = "bottom",
+        legend.title = element_blank(), 
+        legend.text = element_text(size = 9),
+        axis.title = element_text(size = 10))+
+  scale_color_manual(values=colores_cis)+
+    geom_text(aes(label = round(Feijoo, 1)), vjust = -0.5, size = 2.5,show.legend = F)+
+  scale_y_continuous(limits = c(1,10), breaks = seq(0,10, by=2))
+```
+
+#### Código anotado
+
+``` r
+ggplot(cis_pop_recu, aes(x=mes, y=Feijoo, color=recuerdo, group=recuerdo)) +
+
+## Líneas grises de fondo
+  geom_hline(yintercept = seq(1, 10, by = 1), color = "lightgrey", alpha = 0.5)+
+  
+## Líneas, puntos y anotaciones
+  geom_line(linewidth=0.9, linetype=1)+
+  geom_point()+
+  geom_text(aes(label = round(Feijoo, 1)), vjust = -0.5, size = 2.5,show.legend = F)+
+  
+## Otros ajustes
+  scale_y_continuous(limits = c(1,10), breaks = seq(0,10, by=2))+ # Personalizar el eje x
+  theme_classic()+ # El tema del fondo (en blanco)
+  labs(x="Mes de la encuesta", # Etiqueta del eje x
+       y="Valoración media (1 al 10)", #La etiqueta del eje y
+       caption = "Evolución de la valoración de Alberto Nuñez Feijoo según el recuerdo de voto\nFuente: elaboración propia a partir de los datos del CIS")+ # El texto del pio
+  theme(
+        legend.position = "bottom", # Posición de la leyenda
+        legend.title = element_blank(), # Leyenda sin título
+        legend.text = element_text(size = 9), # Tamaño de la leyenda
+        axis.title = element_text(size = 10))+
+  scale_color_manual(values=colores_cis) # Colores personalizados para cada partido (se establece antes la equivalencia en un vector)
+```
+
+#### Formato de los datos
+
+![](images/clipboard-1561502515.png){.zoomable fig-align="center" width="200"}
+:::
+
+### Evolución PIB
+
+::: panel-tabset
+#### Gráfico
+
+![](images/clipboard-3890604405.png){.zoomable fig-align="center" width="500"}
+
+#### Código
+
+``` r
+ggplot(data = gasto_desempleo, aes(x = TIME, y = Value, color = Country, group = Country)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    x = "Año",
+    y = "% PIB",
+    color = "Países",
+    caption = "Fuente: elaboración propia a partir de datos de Eurostat") +
+  ggtitle("Gasto gubernamental en prestaciones por desempleo") +
+  theme(plot.title = element_text(hjust = 0.5))+
+  scale_color_manual(values = c(Spain = "blue", Italy = "red", Netherlands = "green", Austria = "purple")) +
+  theme_minimal() +
+  scale_x_continuous(
+    limits = c(2000, 2019),
+    breaks = c(2000, 2004, 2008, 2012, 2016, 2019),
+    labels = scales::number_format(accuracy = 1)) +
+  geom_vline(xintercept = 2008, linetype = "dashed", color = "black")
+```
+
+#### Código anotado
+
+``` r
+ggplot(data = gasto_desempleo, aes(x = TIME, y = Value, color = Country, group = Country)) +
+
+## Líneas + puntos
+  geom_line() +
+  geom_point() +
+  
+## Etiquetas
+  labs(
+    x = "Año",
+    y = "% PIB",
+    color = "Países",
+    caption = "Fuente: elaboración propia a partir de datos de Eurostat") +
+  ggtitle("Gasto gubernamental en prestaciones por desempleo")+
+  theme(plot.title = element_text(hjust = 0.5))+ # Para centrar el título del gráfico
+  
+## Colores personalizados para las líneas
+  scale_color_manual(values = c(Spain = "blue", Italy = "red", Netherlands = "green", Austria = "purple")) +
+  
+## Tema del gráfico
+  theme_minimal() +
+## Ajuste de las cifras mostradas en el eje x
+  scale_x_continuous(
+    limits = c(2000, 2019),
+    breaks = c(2000, 2004, 2008, 2012, 2016, 2019),
+    labels = scales::number_format(accuracy = 1)) +
+    
+## Añadir línea de puntos vertical para el año 2008
+  geom_vline(xintercept = 2008, linetype = "dashed", color = "black") 
+```
+
+#### Formato de los datos
+
+![](images/clipboard-4262917616.png){.zoomable fig-align="center" width="200"}
+:::
+
+## Líneas rellenas
+
+::: panel-tabset
+#### Gráfico
+
+![](01_img/lineas_relleno.png){.zoomable fig-align="center" width="500"}
+
+#### Código
+
+``` r
+library(ggh4x)
+
+g<-ggplot(data = brecha_edad, aes(x=edad)) + #y=porcentaje, color=genero, group=genero
+  scale_x_continuous(limits=c(15,90),breaks=c(10,20,30,40,50,60,70,80,90))+
+  scale_y_continuous(limits=c(0,40),breaks=c(0,10,20,30,40))+
+  geom_hline(yintercept = c(0, 10, 20,30,40), color = "lightgrey", alpha = 0.5)+
+  geom_vline(xintercept=c(35,65), color="black", linetype="dashed")+
+  theme_classic()+
+  labs(x="Edad",y="Porcentaje de manifestantes",caption = "Figura 2: Porcentaje de manifestantes para cada edad según su género" )+
+  theme(plot.caption = element_text(hjust=0,family="Times New Roman",size=15), #Ajustes del caption
+        text = element_text(size = 11),
+        legend.position = "bottom",
+        legend.title = element_blank(), 
+        legend.text = element_text(size = 10),
+        axis.title = element_text(size = 12)) +
+  geom_line(aes(y=Mujer),color="#51DA2C",size=1.15)+
+  geom_line(aes(y=Hombre),color="#130081",size=1.15)+
+  stat_difference(aes(ymin = Hombre, ymax = Mujer), alpha = 0.5,) +
+  scale_fill_manual(values = c("#51DA2C", "#130081"), labels=c("Mujer","Hombre"))
+g+annotate("text",x=c(23,50,80), y=c(39,39,39),label=c("Jóvenes", "Adultos", "Ancianos"),size=3.6)
+```
+
+#### Código anotado
+
+``` r
+library(ggh4x)
+
+g<-ggplot(data = brecha_edad, aes(x=edad)) +
+
+## Personalizar los ejes
+  scale_x_continuous(limits=c(15,90),breaks=c(10,20,30,40,50,60,70,80,90))+
+  scale_y_continuous(limits=c(0,40),breaks=c(0,10,20,30,40))+
+  geom_hline(yintercept = c(0, 10, 20,30,40), color = "lightgrey", alpha = 0.5)+
+  geom_vline(xintercept=c(35,65), color="black", linetype="dashed")+
+  
+## Ajustes estéticos del gráfico
+  theme_classic()+
+  labs(x="Edad",y="Porcentaje de manifestantes",caption = "Figura 2: Porcentaje de manifestantes para cada edad según su género" )+
+  theme(plot.caption = element_text(hjust=0,family="Times New Roman",size=15), 
+        text = element_text(size = 11),
+        legend.position = "bottom",
+        legend.title = element_blank(), 
+        legend.text = element_text(size = 10),
+        axis.title = element_text(size = 12)) +
+        
+## Lineas y relleno
+  geom_line(aes(y=Mujer),color="#51DA2C",size=1.15)+ # Línea para las mujeres
+  geom_line(aes(y=Hombre),color="#130081",size=1.15)+ # Línea para los hombres
+  stat_difference(aes(ymin = Hombre, ymax = Mujer), alpha = 0.5,) + # El relleno entre las líneas
+  scale_fill_manual(values = c("#51DA2C", "#130081"), labels=c("Mujer","Hombre")) # Personalizar el relleno 
+
+## Añadir las etiquetas de la edad
+g+annotate("text",x=c(23,50,80), y=c(39,39,39),label=c("Jóvenes", "Adultos", "Ancianos"),size=3.6)
+```
+
+#### Formato de los datos
+
+El mismo que en los casos anteriores (tres columnas, datos alargados)
+:::

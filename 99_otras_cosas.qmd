@@ -1,0 +1,103 @@
+---
+title: "Otras cosas"
+---
+
+```{r include=FALSE}
+source("00_datos/source.R")
+```
+
+## Crear una secuencia de números: {#secuencia}
+
+```{r}
+secuencia<-5:15
+secuencia
+seq(5.5, 10, by = 0.5) #la secuencia irá de 5,5 hasta 10, de 0,5 en 0,5
+seq(5, 10, length.out = 5) #entre el 5 y el 10, sacará una secuencia formada por 5 números
+```
+
+También se pueden repetir valores:
+
+```{r}
+valores <- c("yes", "no")
+
+rep(valores, times=3) #Repite la secuencia completa tres veces
+rep(valores, each=3) #Repite cada uno de los valores del vector 3 veces
+```
+
+<br>
+
+## Valores perdidos {#NA}
+
+-   Comprobar si hay valores perdidos: `is.na()` o `anyNA()`. En la consola dirá True o False.
+
+-   Conocer el número de valores perdidos dentro de una variable: `table(datos$var, useNA="always")`.
+
+-   Eliminar todas las observaciones de una base de datos que tengan casos perdidos en alguna de sus variables: `datos <- na.omit(datos)`
+
+<br>
+
+## Crear funciones {#funciones}
+
+Permiten concentrar varios comandos en uno solo.
+
+``` r
+nombre_función <- function (x){
+  argumentos de la función
+}
+```
+
+<br>
+
+### Ejemplos:
+
+-   Función que devuelve el valor de la mitad de un número:
+
+``` r
+funcionmitad <- function(x){
+  y <- x/2
+  return(y)
+}
+```
+
+-   Función que hace una potencia y añade texto:
+
+``` r
+funcionpotencia <- function(x,y){
+  potencia <- x^y
+  z <- "El resultado de la potencia es: "
+  texto <- paste0(z,potencia)
+  return(texto)
+}
+```
+
+-   Función para crear tablas de frecuencia (como %) automáticas (*función table de stata*):
+
+``` r
+tabla <- function(x,y){
+  tabla_decimal <- table(x,y) %>% prop.table %>% round(4)
+  tabla_porcentaje <- tabla_decimal*100
+  return(tabla_porcentaje)
+}
+```
+
+Si algunas de las funciones creadas se quiere reutilizar habitualmente, existen dos formas fáciles de volver a instalarlas:
+
+1.  Escribiendo estas funciones en un script a parte y usando `source`.
+2.  Crear un paquete propio.
+
+<br>
+
+## Recomendaciones para las variables dicotómicas {#recomendaciones_dicotomicas}
+
+Es recomendable nombrar a la variable como la categoría de referencia. Por ejemplo, en el siguente ejemplo la variable se llama hombre en lugar de sexo porque el 1 se corresponde con los hombres. Es mejor hacerlo de este modo porque facilita la interpretación de los análisis. Por ejemplo, al hacer un summary de la nueva variable, se puede ver fácilmente que el 0.51 indica que la proporción de hombres en la muestra es del 51%.
+
+``` r
+datos <- datos %>% 
+  mutate(hombre=ifelse(SEXO==1, 1, 0))
+```
+
+------------------------------------------------------------------------
+
+## S/O: IRENE
+
+![](images/Imagen%20de%20WhatsApp%202024-12-13%20a%20las%2011.57.28_80b1afe2.jpg){fig-align="center" width="50"}

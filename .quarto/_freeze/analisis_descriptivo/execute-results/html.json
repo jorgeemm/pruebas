@@ -1,0 +1,15 @@
+{
+  "hash": "c3b3eb0074382b17a1b55413e1ddba73",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Análisis descriptivo\"\n---\n\n```{=html}\n<style>\nbody {\ntext-align: justify}\n</style>\n```\n\n\n\n\n\n\n\n\n\n## Análisis descriptivo {.tabset .tabset-fade .tabset-pills}\n\n### 1. Estadísticos básicos\n\nLista con los estadísticos descriptivos básicos: `summary()`\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\nsummary(datos$edad)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  18.00   40.00   52.00   51.48   64.00   98.00 \n```\n\n\n:::\n:::\n\n\n\n\n\nTambién se puede obtener un único estadístico de interés: `min()`, `max()`, `median()`, `mean()`, `sd()`\n\n------------------------------------------------------------------------\n\n### 2. Tablas de frecuencias\n\nCon el comando `table`:\n\n``` r\ntable(datos$variable)\n```\n\n-   Ej.:\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\ntable(datos$estudios)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n\nsin_estudios     primaria    fp basica  secundaria2     fp medio   superiores \n         496         1425         3768         4226         5859        13266 \n```\n\n\n:::\n:::\n\n\n\n\n\nSi queremos ver también los valores perdidos de la variable, se añade al comando original la opción `useNA = \"ifany\"`:\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\ntable(datos$estudios, useNA = \"ifany\")\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n\nsin_estudios     primaria    fp basica  secundaria2     fp medio   superiores \n         496         1425         3768         4226         5859        13266 \n        <NA> \n         161 \n```\n\n\n:::\n:::\n\n\n\n\n\n<br>\n\nCon el comando `count`:\n\n``` r\ndatos %>% count(variable)\n```\n\n-   Ej.:\n\n\n\n\n\n::: {.cell layout-align=\"center\"}\n\n```{.r .cell-code}\ndatos %>% count(estudios)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n# A tibble: 7 × 2\n  estudios         n\n  <fct>        <int>\n1 sin_estudios   496\n2 primaria      1425\n3 fp basica     3768\n4 secundaria2   4226\n5 fp medio      5859\n6 superiores   13266\n7 <NA>           161\n```\n\n\n:::\n:::\n\n\n\n\n\n*La explicación de cómo hacer tablas de frecuencias bivariadas, así como su interpretación, está en el apartado de análisis bivariado*\n\n------------------------------------------------------------------------\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

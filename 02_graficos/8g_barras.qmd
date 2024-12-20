@@ -1,0 +1,175 @@
+---
+title: "Gráficos de barras"
+page_id: g_barras
+---
+
+## Barras divididas según una tercera variable
+
+### Distribución ideológica de los votantes según el partido
+
+::: panel-tabset
+### Gráfico
+
+![](01_img/barras_dobles_ideol.png){.zoomable fig-align="center" width="500"}
+
+### Código
+
+``` r
+ggplot(datos, aes(x = ideol, y = freq, fill = partido)) +
+  geom_hline(yintercept = c(0, 5, 10, 15, 20, 25), color = "lightgrey", alpha = 0.5) +
+  geom_bar(stat = "identity", position = "dodge", alpha=0.8) +
+  theme_classic() +
+  labs(x = "Posición ideológica (0-10)",
+       y = "Porcentaje de votantes",
+       caption = "Distribución en la escala ideológica de los votantes del PP y PSOE\nFuente: elaboración propia a partir de los datos de 40db") +
+  geom_text(aes(label = paste0(round(freq, 1), "%")), position = position_dodge(width = 0.9), vjust = -0.5, size = 3)+
+  scale_fill_manual(values=c("PP"="#17589d", "PSOE"="#FF1C1C"))+
+  theme(
+        legend.position = "bottom",
+        legend.title = element_blank(), 
+        legend.text = element_text(size = 9),
+        axis.title = element_text(size = 10))
+```
+
+### Código anotado
+
+``` r
+ggplot(datos, aes(x = ideol, y = freq, fill = partido)) +
+
+## Línes de fondo para indicar los valores del eje y
+  geom_hline(yintercept = c(0, 5, 10, 15, 20, 25), color = "lightgrey", alpha = 0.5) +
+  
+## Las barras
+  geom_bar(stat = "identity", position = "dodge",
+           alpha=0.8) + # Alpha indica la transparencia de las barras (cuanto menor es el número, más transparentes)
+
+## Ajustes estéticos
+  theme_classic() + # Tema del fondo (en blanco)
+  labs(x = "Posición ideológica (0-10)", # Etiqueta eje x
+       y = "Porcentaje de votantes", # Etiqueta eje y
+       caption = "Distribución en la escala ideológica de los votantes del PP y PSOE\nFuente: elaboración propia a partir de los datos de 40db") + # Texto a pie de gráfico. El \n indica que se pasa a otra línea.
+  geom_text(aes(label = paste0(round(freq, 1), "%")), position = position_dodge(width = 0.9), vjust = -0.5, size = 3)+ # Los números del % encima de las barras
+  scale_fill_manual(values=c("PP"="#17589d", "PSOE"="#FF1C1C"))+ # Color del relleno
+  theme( #Ajustes del tamaño y posición de los títulos
+        legend.position = "bottom",
+        legend.title = element_blank(), 
+        legend.text = element_text(size = 9),
+        axis.title = element_text(size = 10))
+```
+:::
+
+### Pertenencia a una generación u otra según el género
+
+::: panel-tabset
+### Gráfico
+
+![](01_img/barras_dobles.png){.zoomable fig-align="center" width="500"}
+
+### Código
+
+``` r
+ggplot(brecha_gen, aes(x = gen, y = porcentaje, fill = genero)) +
+  scale_y_continuous(limits=c(0,30))+
+  geom_hline(yintercept = c(0, 10, 20,30), color = "lightgrey", alpha = 0.5) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.94), width = 0.87, colour="black") +
+  labs(x = "Generación", y = "Porcentaje de manifestantes", fill = "Género", caption = "Figura 3: Porcentaje de manifestantes en cada generación según su género") +
+  theme_classic() +
+  geom_text(aes(label = porcentaje, y = porcentaje + 1),
+            position = position_dodge(width = 1), vjust = 1.1, size = 3) +
+  theme(plot.caption = element_text(hjust=0,family="Times New Roman",size=15), #Ajustes del caption
+        text = element_text(size = 11),  # Tamaño del texto del gráfico
+        legend.position = "bottom",      # Posición de la leyenda
+        legend.title = element_blank(),   # Elimina el título de la leyenda
+        legend.text = element_text(size = 9),  # Tamaño del texto de la leyenda
+        axis.title = element_text(size = 12)) +  # Tamaño del texto de los títulos de los ejes
+  scale_fill_manual(values=c("Hombre"="#d8d8d8", "Mujer"="#777777"))
+```
+
+### Código anotado
+
+``` r
+ggplot(brecha_gen, aes(x = gen, y = porcentaje, fill = genero)) +
+
+## Ajustes del eje y: limites y líneas grises del fondo
+  scale_y_continuous(limits=c(0,30))+
+  geom_hline(yintercept = c(0, 10, 20,30), color = "lightgrey", alpha = 0.5) +
+
+## El gráfico de barras
+  geom_bar(stat = "identity", position = position_dodge(width = 0.94), width = 0.87, colour="black") +
+
+## Otros ajustes estéticos (iguales que en el gráfico anterior)
+  labs(x = "Generación", y = "Porcentaje de manifestantes", fill = "Género", caption = "Figura 3: Porcentaje de manifestantes en cada generación según su género") +
+  theme_classic() +
+  geom_text(aes(label = porcentaje, y = porcentaje + 1),
+            position = position_dodge(width = 1), vjust = 1.1, size = 3) +
+  theme(plot.caption = element_text(hjust=0,family="Times New Roman",size=15), #Ajustes del caption
+        text = element_text(size = 11),  # Tamaño del texto del gráfico
+        legend.position = "bottom",      # Posición de la leyenda
+        legend.title = element_blank(),   # Elimina el título de la leyenda
+        legend.text = element_text(size = 9),  # Tamaño del texto de la leyenda
+        axis.title = element_text(size = 12)) +  # Tamaño del texto de los títulos de los ejes
+  scale_fill_manual(values=c("Hombre"="#d8d8d8", "Mujer"="#777777"))
+```
+:::
+
+### Barras divididas para 4 categorías
+
+::: panel-tabset
+### Gráfico
+
+![](01_img/barras_4_difer_posicion.png){.zoomable fig-align="center" width="500"}
+
+### Código
+
+``` r
+ggplot(diferencias_dcha, aes(x = Tema, y = diferencias, fill = Partido)) +
+  geom_hline(yintercept = seq(0,5,by=0.5), color = "lightgrey", alpha = 0.3) +
+  geom_bar(stat = "identity", position = "dodge", alpha=0.8) +
+  theme_classic() +
+  labs(x = NULL,
+       y = "Diferencia (0-10)",
+       caption = "Distancia entre el Vox y PP y los votantes de derechas y centro.\nLa distancia se ha medido como la resta de la media del partido menos la del grupo ideológico (términos absolutos).",
+       fill="Partido-ideología:") +
+  geom_text(aes(label = round(diferencias, 2)), position = position_dodge(width = 0.9), vjust = -0.5, size = 3)+
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 9),
+        axis.title = element_text(size = 12))+
+  scale_fill_manual(
+    values = c("PP_c"="#85B9ED","PP_d"="#17589d","Vox_c"="#B3E384","Vox_d"="#63ac33"),
+    labels = c("PP_c" = "PP (centro)","PP_d" = "PP (derecha)","Vox_c" = "Vox (centro)","Vox_d" = "Vox (derecha)"))+
+  scale_x_discrete(labels=c("Inversión contra\n Cambio Climático",  "Servicios Públicos\n vs. Impuesto Bajos", "Inmigración", "Derechos LGTBI\n (adopción)", "Descentralización\n Territorial"))
+```
+
+### Código anotado
+
+``` r
+ggplot(diferencias_dcha, aes(x = Tema, y = diferencias, fill = Partido)) +
+
+## Ajustes del eje y: líneas grises del fondo
+  geom_hline(yintercept = seq(0,5,by=0.5), color = "lightgrey", alpha = 0.3) +
+
+## El gráfico de barras
+  geom_bar(stat = "identity", position = "dodge", alpha=0.8) +
+
+## Otros ajustes estéticos (iguales que en el primer gráfico)
+  theme_classic() +
+  labs(x = NULL,
+       y = "Diferencia (0-10)",
+       caption = "Distancia entre el Vox y PP y los votantes de derechas y centro.\nLa distancia se ha medido como la resta de la media del partido menos la del grupo ideológico (términos absolutos).",
+       fill="Partido-ideología:") +
+  geom_text(aes(label = round(diferencias, 2)), position = position_dodge(width = 0.9), vjust = -0.5, size = 3)+
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 9),
+        axis.title = element_text(size = 12))+
+  scale_fill_manual(
+    values = c("PP_c"="#85B9ED","PP_d"="#17589d","Vox_c"="#B3E384","Vox_d"="#63ac33"),
+    labels = c("PP_c" = "PP (centro)","PP_d" = "PP (derecha)","Vox_c" = "Vox (centro)","Vox_d" = "Vox (derecha)"))+
+
+## Para cambiar las etiquetas del eje x
+  scale_x_discrete(labels=c("Inversión contra\n Cambio Climático",  "Servicios Públicos\n vs. Impuesto Bajos", "Inmigración", "Derechos LGTBI\n (adopción)", "Descentralización\n Territorial"))
+```
+
+### Formato de los datos
+
+![](images/clipboard-288138357.png){.zoomable fig-align="center" width="200"}
+:::
