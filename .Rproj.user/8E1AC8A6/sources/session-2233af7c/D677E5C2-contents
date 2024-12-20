@@ -1,6 +1,5 @@
 project:
   type: website
-  output-dir: docs
 
 website:
   title: "Apuntes R"
@@ -16,13 +15,14 @@ website:
     left:
       - text: "Introducción a R"
         href: index.qmd         # El archivo de referencia que se abrirá cuando se pulse sobre esa pestaña
+      - text: "Bases de datos y variables"
+        href: 21_ficheros_datos.qmd
+      - text: "Análisis de datos"
+        href: 31_analisis_descriptivo.qmd
       - text: "Otras cosas"
         href: 99_otras_cosas.qmd
       - text: "Gráficos"
-        href: 02_graficos/8g_graficos.qmd
-      - text: "Análisis de datos"
-        href: 31_analisis_descriptivo.qmd
-
+        href: "02_graficos/8g_graficos.qmd"
 
 # El menú lateral se escribe así:
   sidebar:
@@ -30,10 +30,31 @@ website:
                                 # Es la forma de añadir una subsecció lateral dentro de las pestañas superiores, pero solo para una parte de los archivos, en lugar de mostrarlos todos.
       contents: 
         - index.qmd
-        - 02_intro/11_introduccion.qmd
-        - 02_intro/12_documentos_r.qmd
-        - 02_intro/13_flujos_trabajo.qmd
-        - 02_intro/14_operaciones_basicas.qmd
+        - 11_introduccion.qmd
+        - 12_documentos_r.qmd
+        - 13_flujos_trabajo.qmd
+        - 14_operaciones_basicas.qmd
+      
+    - title: "Bases de datos y variables"
+      contents:
+        - 21_ficheros_datos.qmd
+        - 22_edicion_variables.qmd
+      
+    - title: "Análisis de datos"
+      contents:
+        - 31_analisis_descriptivo.qmd
+        - section: "Análisis bivariado"
+          contents:
+            - 40_teoria.qmd
+            - 41_ttest.qmd
+            - 42_correlacion.qmd
+            - 43_tablas_contingencia.qmd
+        - section: "Regresiones"
+          contents:
+            - 51_reg_lineal.qmd
+            - 52_reg_multiple.qmd
+            - 53_predicciones.qmd
+            - 54_reg_logistica.qmd
       
     - title: "Otras cosas"
       contents:

@@ -93,4 +93,4 @@ editor: visual
 
 
 
-# Para publicar la página se escribe lo siguiente en el terminal: quarto publish quarto-pub
+# Para publicar la página se escribe lo siguiente en el terminal: quarto publish gh-pages
