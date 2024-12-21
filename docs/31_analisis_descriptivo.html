@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Otras cosas – Apuntes R</title>
+<title>Análisis descriptivo – Apuntes R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <span class="menu-text">Introducción a R</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./99_otras_cosas.html" aria-current="page"> 
+    <a class="nav-link" href="./99_otras_cosas.html"> 
 <span class="menu-text">Otras cosas</span></a>
   </li>  
   <li class="nav-item">
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <span class="menu-text">Gráficos</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./31_analisis_descriptivo.html"> 
+    <a class="nav-link active" href="./31_analisis_descriptivo.html" aria-current="page"> 
 <span class="menu-text">Análisis</span></a>
   </li>  
 </ul>
@@ -173,24 +173,41 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title">Análisis descriptivo</h1>
+        </a>     
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./31_analisis_descriptivo.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Análisis descriptivo</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#secuencia" id="toc-secuencia" class="nav-link active" data-scroll-target="#secuencia">Crear una secuencia de números:</a></li>
-  <li><a href="#NA" id="toc-NA" class="nav-link" data-scroll-target="#NA">Valores perdidos</a></li>
-  <li><a href="#funciones" id="toc-funciones" class="nav-link" data-scroll-target="#funciones">Crear funciones</a>
-  <ul class="collapse">
-  <li><a href="#ejemplos" id="toc-ejemplos" class="nav-link" data-scroll-target="#ejemplos">Ejemplos:</a></li>
-  </ul></li>
-  <li><a href="#recomendaciones_dicotomicas" id="toc-recomendaciones_dicotomicas" class="nav-link" data-scroll-target="#recomendaciones_dicotomicas">Recomendaciones para las variables dicotómicas</a></li>
-  <li><a href="#so-irene" id="toc-so-irene" class="nav-link" data-scroll-target="#so-irene">S/O: IRENE</a></li>
+  <li><a href="#estadísticos-básicos" id="toc-estadísticos-básicos" class="nav-link active" data-scroll-target="#estadísticos-básicos">1. Estadísticos básicos</a></li>
+  <li><a href="#tablas-de-frecuencias" id="toc-tablas-de-frecuencias" class="nav-link" data-scroll-target="#tablas-de-frecuencias">2. Tablas de frecuencias</a></li>
   </ul>
 </nav>
     </div>
@@ -199,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Otras cosas</h1>
+<h1 class="title d-none d-lg-block">Análisis descriptivo</h1>
 </div>
 
 
@@ -216,102 +233,67 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<section id="secuencia" class="level2">
-<h2 class="anchored" data-anchor-id="secuencia">Crear una secuencia de números:</h2>
+<section id="estadísticos-básicos" class="level2">
+<h2 class="anchored" data-anchor-id="estadísticos-básicos">1. Estadísticos básicos</h2>
+<p>Lista con los estadísticos descriptivos básicos: <code>summary()</code></p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>secuencia<span class="ot">&lt;-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">15</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>secuencia</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos<span class="sc">$</span>edad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  5  6  7  8  9 10 11 12 13 14 15</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="fl">5.5</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="fl">0.5</span>) <span class="co">#la secuencia irá de 5,5 hasta 10, de 0,5 en 0,5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  5.5  6.0  6.5  7.0  7.5  8.0  8.5  9.0  9.5 10.0</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="at">length.out =</span> <span class="dv">5</span>) <span class="co">#entre el 5 y el 10, sacará una secuencia formada por 5 números</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  5.00  6.25  7.50  8.75 10.00</code></pre>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  18.00   40.00   52.00   51.48   64.00   98.00 </code></pre>
 </div>
 </div>
-<p>También se pueden repetir valores:</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>valores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"yes"</span>, <span class="st">"no"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(valores, <span class="at">times=</span><span class="dv">3</span>) <span class="co">#Repite la secuencia completa tres veces</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "yes" "no"  "yes" "no"  "yes" "no" </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(valores, <span class="at">each=</span><span class="dv">3</span>) <span class="co">#Repite cada uno de los valores del vector 3 veces</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "yes" "yes" "yes" "no"  "no"  "no" </code></pre>
-</div>
-</div>
-<p><br></p>
-</section>
-<section id="NA" class="level2">
-<h2 class="anchored" data-anchor-id="NA">Valores perdidos</h2>
-<ul>
-<li><p>Comprobar si hay valores perdidos: <code>is.na()</code> o <code>anyNA()</code>. En la consola dirá True o False.</p></li>
-<li><p>Conocer el número de valores perdidos dentro de una variable: <code>table(datos$var, useNA="always")</code>.</p></li>
-<li><p>Eliminar todas las observaciones de una base de datos que tengan casos perdidos en alguna de sus variables: <code>datos &lt;- na.omit(datos)</code></p></li>
-</ul>
-<p><br></p>
-</section>
-<section id="funciones" class="level2">
-<h2 class="anchored" data-anchor-id="funciones">Crear funciones</h2>
-<p>Permiten concentrar varios comandos en uno solo.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>nombre_función <span class="ot">&lt;-</span> <span class="cf">function</span> (x){</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  argumentos de la función</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<section id="ejemplos" class="level3">
-<h3 class="anchored" data-anchor-id="ejemplos">Ejemplos:</h3>
-<ul>
-<li>Función que devuelve el valor de la mitad de un número:</li>
-</ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>funcionmitad <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x<span class="sc">/</span><span class="dv">2</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(y)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Función que hace una potencia y añade texto:</li>
-</ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>funcionpotencia <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  potencia <span class="ot">&lt;-</span> x<span class="sc">^</span>y</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="st">"El resultado de la potencia es: "</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  texto <span class="ot">&lt;-</span> <span class="fu">paste0</span>(z,potencia)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(texto)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Función para crear tablas de frecuencia (como %) automáticas (<em>función table de stata</em>):</li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tabla <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  tabla_decimal <span class="ot">&lt;-</span> <span class="fu">table</span>(x,y) <span class="sc">%&gt;%</span> prop.table <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">4</span>)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  tabla_porcentaje <span class="ot">&lt;-</span> tabla_decimal<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(tabla_porcentaje)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Si algunas de las funciones creadas se quiere reutilizar habitualmente, existen dos formas fáciles de volver a instalarlas:</p>
-<ol type="1">
-<li>Escribiendo estas funciones en un script a parte y usando <code>source</code>.</li>
-<li>Crear un paquete propio.</li>
-</ol>
-<p><br></p>
-</section>
-</section>
-<section id="recomendaciones_dicotomicas" class="level2">
-<h2 class="anchored" data-anchor-id="recomendaciones_dicotomicas">Recomendaciones para las variables dicotómicas</h2>
-<p>Es recomendable nombrar a la variable como la categoría de referencia. Por ejemplo, en el siguente ejemplo la variable se llama hombre en lugar de sexo porque el 1 se corresponde con los hombres. Es mejor hacerlo de este modo porque facilita la interpretación de los análisis. Por ejemplo, al hacer un summary de la nueva variable, se puede ver fácilmente que el 0.51 indica que la proporción de hombres en la muestra es del 51%.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">hombre=</span><span class="fu">ifelse</span>(SEXO<span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>También se puede obtener un único estadístico de interés: <code>min()</code>, <code>max()</code>, <code>median()</code>, <code>mean()</code>, <code>sd()</code></p>
 <hr>
 </section>
-<section id="so-irene" class="level2">
-<h2 class="anchored" data-anchor-id="so-irene">S/O: IRENE</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/Imagen de WhatsApp 2024-12-13 a las 11.57.28_80b1afe2.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="50"></p>
-</figure>
+<section id="tablas-de-frecuencias" class="level2">
+<h2 class="anchored" data-anchor-id="tablas-de-frecuencias">2. Tablas de frecuencias</h2>
+<p>Con el comando <code>table</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Ej.:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>estudios)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+sin_estudios     primaria    fp basica  secundaria2     fp medio   superiores 
+         496         1425         3768         4226         5859        13266 </code></pre>
 </div>
+</div>
+<p>Si queremos ver también los valores perdidos de la variable, se añade al comando original la opción <code>useNA = "ifany"</code> (para que muestre los NA solo cuando existan) o <code>useNA = "always"</code> (si queremos que aparezca el número de NA incluso si este es 0):</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>estudios, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+sin_estudios     primaria    fp basica  secundaria2     fp medio   superiores 
+         496         1425         3768         4226         5859        13266 
+        &lt;NA&gt; 
+         161 </code></pre>
+</div>
+</div>
+<p>Con el comando <code>count</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> <span class="fu">count</span>(variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Ej.:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> <span class="fu">count</span>(estudios)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+  estudios         n
+  &lt;fct&gt;        &lt;int&gt;
+1 sin_estudios   496
+2 primaria      1425
+3 fp basica     3768
+4 secundaria2   4226
+5 fp medio      5859
+6 superiores   13266
+7 &lt;NA&gt;           161</code></pre>
+</div>
+</div>
+<p><em>La explicación de cómo hacer tablas de frecuencias bivariadas, así como su interpretación, está en el apartado de análisis bivariado</em></p>
+<hr>
 
 
 </section>

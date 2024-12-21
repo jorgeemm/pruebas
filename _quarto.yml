@@ -19,7 +19,9 @@ website:
       - text: "Otras cosas"
         href: 99_otras_cosas.qmd
       - text: "Gráficos"
-        href: "02_graficos/8g_graficos.qmd"
+        href: 02_graficos/8g_graficos.qmd
+      - text: "Análisis"
+        href: 31_analisis_descriptivo.qmd
 
 # El menú lateral se escribe así:
   sidebar:
@@ -35,6 +37,10 @@ website:
     - title: "Otras cosas"
       contents:
         - 9_otras_cosas.qmd
+    
+    - title: "Análisis descriptivo"
+      contents:
+        - 31_analisis_descriptivo.qmd
         
     - title: "Gráficos"
       contents:
