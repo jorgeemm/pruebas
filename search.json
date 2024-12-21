@@ -15,21 +15,33 @@
     "href": "31_analisis_descriptivo.html",
     "title": "Análisis descriptivo",
     "section": "",
-    "text": "Lista con los estadísticos descriptivos básicos: summary()\n\nsummary(datos$edad)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  18.00   40.00   52.00   51.48   64.00   98.00 \n\n\nTambién se puede obtener un único estadístico de interés: min(), max(), median(), mean(), sd()"
+    "text": "Lista con los estadísticos descriptivos básicos: summary()\n\nsummary(datos$edad)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  18.00   40.00   52.00   51.48   64.00   98.00 \n\n\nTambién se puede obtener un único estadístico de interés: min(), max(), median(), mean(), sd()",
+    "crumbs": [
+      "Análisis",
+      "Análisis descriptivo"
+    ]
   },
   {
     "objectID": "31_analisis_descriptivo.html#estadísticos-básicos",
     "href": "31_analisis_descriptivo.html#estadísticos-básicos",
     "title": "Análisis descriptivo",
     "section": "",
-    "text": "Lista con los estadísticos descriptivos básicos: summary()\n\nsummary(datos$edad)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  18.00   40.00   52.00   51.48   64.00   98.00 \n\n\nTambién se puede obtener un único estadístico de interés: min(), max(), median(), mean(), sd()"
+    "text": "Lista con los estadísticos descriptivos básicos: summary()\n\nsummary(datos$edad)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  18.00   40.00   52.00   51.48   64.00   98.00 \n\n\nTambién se puede obtener un único estadístico de interés: min(), max(), median(), mean(), sd()",
+    "crumbs": [
+      "Análisis",
+      "Análisis descriptivo"
+    ]
   },
   {
     "objectID": "31_analisis_descriptivo.html#tablas-de-frecuencias",
     "href": "31_analisis_descriptivo.html#tablas-de-frecuencias",
     "title": "Análisis descriptivo",
     "section": "2. Tablas de frecuencias",
-    "text": "2. Tablas de frecuencias\nCon el comando table:\ntable(datos$variable)\n\nEj.:\n\n\ntable(datos$estudios)\n\n\nsin_estudios     primaria    fp basica  secundaria2     fp medio   superiores \n         496         1425         3768         4226         5859        13266 \n\n\nSi queremos ver también los valores perdidos de la variable, se añade al comando original la opción useNA = \"ifany\" (para que muestre los NA solo cuando existan) o useNA = \"always\" (si queremos que aparezca el número de NA incluso si este es 0):\n\ntable(datos$estudios, useNA = \"ifany\")\n\n\nsin_estudios     primaria    fp basica  secundaria2     fp medio   superiores \n         496         1425         3768         4226         5859        13266 \n        &lt;NA&gt; \n         161 \n\n\nCon el comando count:\ndatos %&gt;% count(variable)\n\nEj.:\n\n\ndatos %&gt;% count(estudios)\n\n# A tibble: 7 × 2\n  estudios         n\n  &lt;fct&gt;        &lt;int&gt;\n1 sin_estudios   496\n2 primaria      1425\n3 fp basica     3768\n4 secundaria2   4226\n5 fp medio      5859\n6 superiores   13266\n7 &lt;NA&gt;           161\n\n\nLa explicación de cómo hacer tablas de frecuencias bivariadas, así como su interpretación, está en el apartado de análisis bivariado"
+    "text": "2. Tablas de frecuencias\nCon el comando table:\ntable(datos$variable)\n\nEj.:\n\n\ntable(datos$estudios)\n\n\nsin_estudios     primaria    fp basica  secundaria2     fp medio   superiores \n         496         1425         3768         4226         5859        13266 \n\n\nSi queremos ver también los valores perdidos de la variable, se añade al comando original la opción useNA = \"ifany\" (para que muestre los NA solo cuando existan) o useNA = \"always\" (si queremos que aparezca el número de NA incluso si este es 0):\n\ntable(datos$estudios, useNA = \"ifany\")\n\n\nsin_estudios     primaria    fp basica  secundaria2     fp medio   superiores \n         496         1425         3768         4226         5859        13266 \n        &lt;NA&gt; \n         161 \n\n\nCon el comando count:\ndatos %&gt;% count(variable)\n\nEj.:\n\n\ndatos %&gt;% count(estudios)\n\n# A tibble: 7 × 2\n  estudios         n\n  &lt;fct&gt;        &lt;int&gt;\n1 sin_estudios   496\n2 primaria      1425\n3 fp basica     3768\n4 secundaria2   4226\n5 fp medio      5859\n6 superiores   13266\n7 &lt;NA&gt;           161\n\n\nLa explicación de cómo hacer tablas de frecuencias bivariadas, así como su interpretación, está en el apartado de análisis bivariado",
+    "crumbs": [
+      "Análisis",
+      "Análisis descriptivo"
+    ]
   },
   {
     "objectID": "02_intro/13_flujos_trabajo.html",
