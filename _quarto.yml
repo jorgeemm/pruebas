@@ -1,6 +1,10 @@
 project:
   type: website
-  output-dir: docs
+
+publish:
+  output-dir: _site
+  site-url: https://jorgeemm.github.io/pruebas
+  gh-pages: true
 
 execute: 
   freeze: auto
