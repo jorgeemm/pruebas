@@ -1,0 +1,88 @@
+---
+title: "T-test"
+---
+
+```{r include=FALSE}
+library(tidyverse)
+library(pacman)
+source("00_datos/source.R")
+```
+
+## Test de una media:
+
+El objetivo de este tipo de test es comprobar si la media poblacional de una variable se corresponde con una determinada cifra.
+
+``` r
+t.test(datos$variable, mu = 5, conf.level = 0.99)
+```
+
+-   `mu = número` es donde se indica el valor de la media para el cual se quiere comprobar si la media poblacional es significativamente distinta. Es decir, si se quiere comprobar si la media es igual a 5, se escribirá `mu = 5`.
+-   `conf.level` sirve para establecer un intervalo de confianza específico. Si no se añade esta opción, el intervalo será al 95%.
+
+```{r}
+t.test(datos$ideol, mu=5.5)
+```
+
+En este caso, se puede decir que al 95% de confianza la media ideológica de la población es distinta de 5.5 (en una escala del 1 al 10). Se sabe por tres motivos:
+
+-   El p-value es \< de 0,05
+-   El valor de t \< -1,96
+-   En el intervalo de confianza no se incluye el 5.5
+
+*La explicación del por qué está en el apartado de la teoría*
+
+## Test de proporciones
+
+**Para variables dicotómicas**. Lo que se intenta con este tipo de test no es comprobar si una determinada cifra se incluye dentro de la media poblacional, sino si una variable alcanza un determinado porcentaje.
+
+P.ej., para saber si el PP puede alcanzar un 35% de los votos, se crea una variable dicotómica donde 0 es no votarlo y 1 sí. Después, se hace un ttest como el anterior, pero en el mu se especifica el porcentaje que se quiere comprobar si se alcanza (0.35 en este caso).
+
+```{r}
+t.test(datos$intvoto_pp, mu=0.35)
+```
+
+Los resultados se interpretan igual que en el test de una media.
+
+## Test de dos medias
+
+La hipótesis nula en este tipo de prueba es que las dos medias son iguales y la hipótesis alternativa es que no lo son.
+
+``` r
+t.test(datos$var1 ~ datos$var2)
+```
+
+-   `var2` es la variable dicotómica que divide a la muestra en los dos grupos de interés, para los cuales se tratará de averiguar si la media de la
+-   `var1` (variable numérica) es igual en ambos o no.
+
+```{r eval=TRUE}
+t.test(datos$ideol ~ datos$hombre)
+```
+
+Los resultados indican que la media de ideología de las mujeres en la muestra es 4.75 y la de los hombres 4.87. Esta diferencia es suficiente para rechazar la Ho, es decir, existen diferencias significativas en la ideología en función del género.
+
+## Comparación de medias para dos variables numéricas
+
+Si son **muestras independientes**:
+
+``` r
+t.test(datos$variable1, datos$variable2)
+```
+
+En el caso de **muestras dependientes**, el comando es el siguiente:
+
+``` r
+t.test(datos$variable1, datos$variable2, paired = TRUE)
+```
+
+La prueba t pareada se utiliza cuando las medias que estamos comparando no son independientes. En otras palabras:
+
+-   Correnponden al mismo conjunto de sujetos en dos momentos diferentes (por ejemplo, antes y después de un tratamiento).
+-   Se comparan dos variables medidas en las mismas personas o unidades (las mismas personas opinan o responden sobre dos cosas diferentes).
+
+Ej.: comprobar si las personas tienen la misma probabilidad de votar al PP y VOX:
+
+```{r}
+t.test(datos$prop_vox, datos$prop_pp, paired=TRUE) 
+```
+
+------------------------------------------------------------------------

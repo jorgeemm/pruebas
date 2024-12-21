@@ -2,6 +2,9 @@ project:
   type: website
   output-dir: docs
 
+execute: 
+  freeze: auto
+
 website:
   title: "Apuntes R"
   favicon: 01_img/icono.png
@@ -41,6 +44,7 @@ website:
     - title: "Análisis descriptivo"
       contents:
         - 31_analisis_descriptivo.qmd
+        - 41_ttest.qmd
         
     - title: "Gráficos"
       contents:
@@ -96,4 +100,9 @@ editor: visual
 
 
 
-# Para publicar la página se escribe lo siguiente en el terminal: quarto publish quarto-pub
+# Cuando se ha creado un nuevo documento o actualizado alguno se debe escribir en el terminal lo siguiente: quarto render nombre_documento.qmd
+# Esto sirve para generar el archivo html que es el que se usa para que funcione la página.
+# En el terminal se puede usar también directamente quarto render, que ejecuta todos los documentos de quarto del proyecto.
+# Esta opción es peor porque tarda más y si solo has cambiado algún archivo concreto no tiene demasiado sentido.
+
+### Cuando se han creado los nuevos html, se actualiza el github en la rama main y así se actualizará la página automáticamente.

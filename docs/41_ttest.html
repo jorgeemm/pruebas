@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Análisis descriptivo – Apuntes R</title>
+<title>T-test – Apuntes R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./41_ttest.html" rel="next">
+<link href="./31_analisis_descriptivo.html" rel="prev">
 <link href="./01_img/icono.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-          <h1 class="quarto-secondary-nav-title">Análisis descriptivo</h1>
+          <h1 class="quarto-secondary-nav-title">T-test</h1>
         </a>     
     </div>
   </nav>
@@ -193,13 +193,13 @@ document.addEventListener('DOMContentLoaded', function() {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./31_analisis_descriptivo.html" class="sidebar-item-text sidebar-link active">
+  <a href="./31_analisis_descriptivo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Análisis descriptivo</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./41_ttest.html" class="sidebar-item-text sidebar-link">
+  <a href="./41_ttest.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">T-test</span></a>
   </div>
 </li>
@@ -213,8 +213,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#estadísticos-básicos" id="toc-estadísticos-básicos" class="nav-link active" data-scroll-target="#estadísticos-básicos">1. Estadísticos básicos</a></li>
-  <li><a href="#tablas-de-frecuencias" id="toc-tablas-de-frecuencias" class="nav-link" data-scroll-target="#tablas-de-frecuencias">2. Tablas de frecuencias</a></li>
+  <li><a href="#test-de-una-media" id="toc-test-de-una-media" class="nav-link active" data-scroll-target="#test-de-una-media">Test de una media:</a></li>
+  <li><a href="#test-de-proporciones" id="toc-test-de-proporciones" class="nav-link" data-scroll-target="#test-de-proporciones">Test de proporciones</a></li>
+  <li><a href="#test-de-dos-medias" id="toc-test-de-dos-medias" class="nav-link" data-scroll-target="#test-de-dos-medias">Test de dos medias</a></li>
+  <li><a href="#comparación-de-medias-para-dos-variables-numéricas" id="toc-comparación-de-medias-para-dos-variables-numéricas" class="nav-link" data-scroll-target="#comparación-de-medias-para-dos-variables-numéricas">Comparación de medias para dos variables numéricas</a></li>
   </ul>
 </nav>
     </div>
@@ -223,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Análisis descriptivo</h1>
+<h1 class="title d-none d-lg-block">T-test</h1>
 </div>
 
 
@@ -240,66 +242,114 @@ document.addEventListener('DOMContentLoaded', function() {
 </header>
 
 
-<section id="estadísticos-básicos" class="level2">
-<h2 class="anchored" data-anchor-id="estadísticos-básicos">1. Estadísticos básicos</h2>
-<p>Lista con los estadísticos descriptivos básicos: <code>summary()</code></p>
+<section id="test-de-una-media" class="level2">
+<h2 class="anchored" data-anchor-id="test-de-una-media">Test de una media:</h2>
+<p>El objetivo de este tipo de test es comprobar si la media poblacional de una variable se corresponde con una determinada cifra.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos<span class="sc">$</span>variable, <span class="at">mu =</span> <span class="dv">5</span>, <span class="at">conf.level =</span> <span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>mu = número</code> es donde se indica el valor de la media para el cual se quiere comprobar si la media poblacional es significativamente distinta. Es decir, si se quiere comprobar si la media es igual a 5, se escribirá <code>mu = 5</code>.</li>
+<li><code>conf.level</code> sirve para establecer un intervalo de confianza específico. Si no se añade esta opción, el intervalo será al 95%.</li>
+</ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(datos<span class="sc">$</span>edad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos<span class="sc">$</span>ideol, <span class="at">mu=</span><span class="fl">5.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-  18.00   40.00   52.00   51.48   64.00   98.00 </code></pre>
+<pre><code>
+    One Sample t-test
+
+data:  datos$ideol
+t = -43.622, df = 28265, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 5.5
+95 percent confidence interval:
+ 4.785116 4.846597
+sample estimates:
+mean of x 
+ 4.815857 </code></pre>
 </div>
 </div>
-<p>También se puede obtener un único estadístico de interés: <code>min()</code>, <code>max()</code>, <code>median()</code>, <code>mean()</code>, <code>sd()</code></p>
-<hr>
+<p>En este caso, se puede decir que al 95% de confianza la media ideológica de la población es distinta de 5.5 (en una escala del 1 al 10). Se sabe por tres motivos:</p>
+<ul>
+<li>El p-value es &lt; de 0,05</li>
+<li>El valor de t &lt; -1,96</li>
+<li>En el intervalo de confianza no se incluye el 5.5</li>
+</ul>
+<p><em>La explicación del por qué está en el apartado de la teoría</em></p>
 </section>
-<section id="tablas-de-frecuencias" class="level2">
-<h2 class="anchored" data-anchor-id="tablas-de-frecuencias">2. Tablas de frecuencias</h2>
-<p>Con el comando <code>table</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Ej.:</li>
-</ul>
+<section id="test-de-proporciones" class="level2">
+<h2 class="anchored" data-anchor-id="test-de-proporciones">Test de proporciones</h2>
+<p><strong>Para variables dicotómicas</strong>. Lo que se intenta con este tipo de test no es comprobar si una determinada cifra se incluye dentro de la media poblacional, sino si una variable alcanza un determinado porcentaje.</p>
+<p>P.ej., para saber si el PP puede alcanzar un 35% de los votos, se crea una variable dicotómica donde 0 es no votarlo y 1 sí. Después, se hace un ttest como el anterior, pero en el mu se especifica el porcentaje que se quiere comprobar si se alcanza (0.35 en este caso).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>estudios)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos<span class="sc">$</span>intvoto_pp, <span class="at">mu=</span><span class="fl">0.35</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-sin_estudios     primaria    fp basica  secundaria2     fp medio   superiores 
-         496         1425         3768         4226         5859        13266 </code></pre>
+    One Sample t-test
+
+data:  datos$intvoto_pp
+t = -8.4891, df = 23428, p-value &lt; 2.2e-16
+alternative hypothesis: true mean is not equal to 0.35
+95 percent confidence interval:
+ 0.3180496 0.3300361
+sample estimates:
+mean of x 
+0.3240429 </code></pre>
 </div>
 </div>
-<p>Si queremos ver también los valores perdidos de la variable, se añade al comando original la opción <code>useNA = "ifany"</code> (para que muestre los NA solo cuando existan) o <code>useNA = "always"</code> (si queremos que aparezca el número de NA incluso si este es 0):</p>
-<div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(datos<span class="sc">$</span>estudios, <span class="at">useNA =</span> <span class="st">"ifany"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-sin_estudios     primaria    fp basica  secundaria2     fp medio   superiores 
-         496         1425         3768         4226         5859        13266 
-        &lt;NA&gt; 
-         161 </code></pre>
-</div>
-</div>
-<p>Con el comando <code>count</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> <span class="fu">count</span>(variable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Los resultados se interpretan igual que en el test de una media.</p>
+</section>
+<section id="test-de-dos-medias" class="level2">
+<h2 class="anchored" data-anchor-id="test-de-dos-medias">Test de dos medias</h2>
+<p>La hipótesis nula en este tipo de prueba es que las dos medias son iguales y la hipótesis alternativa es que no lo son.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos<span class="sc">$</span>var1 <span class="sc">~</span> datos<span class="sc">$</span>var2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
-<li>Ej.:</li>
+<li><code>var2</code> es la variable dicotómica que divide a la muestra en los dos grupos de interés, para los cuales se tratará de averiguar si la media de la</li>
+<li><code>var1</code> (variable numérica) es igual en ambos o no.</li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>datos <span class="sc">%&gt;%</span> <span class="fu">count</span>(estudios)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos<span class="sc">$</span>ideol <span class="sc">~</span> datos<span class="sc">$</span>hombre)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 2
-  estudios         n
-  &lt;fct&gt;        &lt;int&gt;
-1 sin_estudios   496
-2 primaria      1425
-3 fp basica     3768
-4 secundaria2   4226
-5 fp medio      5859
-6 superiores   13266
-7 &lt;NA&gt;           161</code></pre>
+<pre><code>
+    Welch Two Sample t-test
+
+data:  datos$ideol by datos$hombre
+t = -3.7778, df = 27496, p-value = 0.0001586
+alternative hypothesis: true difference in means between group Mujer and group Hombre is not equal to 0
+95 percent confidence interval:
+ -0.1806671 -0.0572345
+sample estimates:
+ mean in group Mujer mean in group Hombre 
+            4.754256             4.873207 </code></pre>
 </div>
 </div>
-<p><em>La explicación de cómo hacer tablas de frecuencias bivariadas, así como su interpretación, está en el apartado de análisis bivariado</em></p>
+<p>Los resultados indican que la media de ideología de las mujeres en la muestra es 4.75 y la de los hombres 4.87. Esta diferencia es suficiente para rechazar la Ho, es decir, existen diferencias significativas en la ideología en función del género.</p>
+</section>
+<section id="comparación-de-medias-para-dos-variables-numéricas" class="level2">
+<h2 class="anchored" data-anchor-id="comparación-de-medias-para-dos-variables-numéricas">Comparación de medias para dos variables numéricas</h2>
+<p>Si son <strong>muestras independientes</strong>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos<span class="sc">$</span>variable1, datos<span class="sc">$</span>variable2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>En el caso de <strong>muestras dependientes</strong>, el comando es el siguiente:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos<span class="sc">$</span>variable1, datos<span class="sc">$</span>variable2, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La prueba t pareada se utiliza cuando las medias que estamos comparando no son independientes. En otras palabras:</p>
+<ul>
+<li>Correnponden al mismo conjunto de sujetos en dos momentos diferentes (por ejemplo, antes y después de un tratamiento).</li>
+<li>Se comparan dos variables medidas en las mismas personas o unidades (las mismas personas opinan o responden sobre dos cosas diferentes).</li>
+</ul>
+<p>Ej.: comprobar si las personas tienen la misma probabilidad de votar al PP y VOX:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(datos<span class="sc">$</span>prop_vox, datos<span class="sc">$</span>prop_pp, <span class="at">paired=</span><span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  datos$prop_vox and datos$prop_pp
+t = -69.828, df = 28775, p-value &lt; 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -1.652107 -1.561891
+sample estimates:
+mean difference 
+      -1.606999 </code></pre>
+</div>
+</div>
 <hr>
 
 
@@ -872,11 +922,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./31_analisis_descriptivo.html" class="pagination-link" aria-label="Análisis descriptivo">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Análisis descriptivo</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./41_ttest.html" class="pagination-link" aria-label="T-test">
-        <span class="nav-page-text">T-test</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
